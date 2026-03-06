@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Basic Meta -->
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<!-- SEO Meta -->
+		<title>Goal-Based Productivity Coach</title>
+		<meta
+			name="description"
+			content="Optimize your study and execution time based on your goals. ML-powered productivity recommendations."
+		/>
+		<meta
+			name="keywords"
+			content="productivity, study planner, time management, goal-based, ML, coaching"
+		/>
+		<meta name="author" content="Seseshe" />
+
+		<!-- Open Graph / Social -->
+		<meta property="og:title" content="Goal-Based Productivity Coach" />
+		<meta
+			property="og:description"
+			content="Optimize your study and execution time based on your goals. ML-powered productivity recommendations."
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://yourwebsite.com/" />
+		<meta
+			property="og:image"
+			content="https://yourwebsite.com/static/preview.png"
+		/>
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Goal-Based Productivity Coach" />
+		<meta
+			name="twitter:description"
+			content="Optimize your study and execution time based on your goals. ML-powered productivity recommendations."
+		/>
+		<meta
+			name="twitter:image"
+			content="https://yourwebsite.com/static/preview.png"
+		/>
+
+		<!-- Favicon -->
+		<link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+
+		<!-- Styles -->
+		<style>
+			/* Reset & basic layout */
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+			body {
+				font-family: system-ui, sans-serif;
+				margin: 0;
+				padding: 0;
+				background: #f9fafb;
+				color: #111;
+				line-height: 1.6;
+			}
+			main {
+				max-width: 600px;
+				margin: 2rem auto;
+				padding: 1rem;
+				background: #fff;
+				border-radius: 0.5rem;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+			}
+
+			h1 {
+				font-size: 2rem;
+				margin-bottom: 1rem;
+				text-align: center;
+			}
+			form {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+			label {
+				font-weight: bold;
+			}
+			input,
+			select,
+			button {
+				padding: 0.5rem;
+				font-size: 1rem;
+				border: 1px solid #ccc;
+				border-radius: 0.25rem;
+				width: 100%;
+			}
+			button {
+				background: #4f46e5;
+				color: #fff;
+				border: none;
+				cursor: pointer;
+				transition: background 0.2s ease;
+			}
+			button:hover {
+				background: #4338ca;
+			}
+			.result {
+				margin-top: 1.5rem;
+				padding: 1rem;
+				background: #e0f2fe;
+				border-left: 4px solid #0284c7;
+				border-radius: 0.25rem;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1>Goal-Based Productivity Coach</h1>
+
+			<!-- Form -->
+			<form
+				method="POST"
+				action="{{ url_for('recommend') }}"
+				aria-label="Productivity Recommendation Form"
+			>
+				<div>
+					<label for="goal">Select Your Goal:</label>
+					<select id="goal" name="goal" required>
+						<option value="" disabled selected>Select goal</option>
+						<option value="exam">Exam</option>
+						<option value="project">Project</option>
+						<option value="chill">Chill / Maintenance</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="hours">Total Available Hours:</label>
+					<input
+						type="number"
+						id="hours"
+						name="hours"
+						min="1"
+						max="24"
+						step="1"
+						required
+						aria-describedby="hoursHelp"
+					/>
+					<small id="hoursHelp"
+						>Enter the total hours you have available for study and execution
+						today.</small
+					>
+				</div>
+
+				<button type="submit">Get Recommendation</button>
+			</form>
+
+			<!-- Recommendation Result -->
+			{% if best %}
+			<section class="result" aria-live="polite">
+				<h2>Your Optimal Plan</h2>
+				<p><strong>Study Time:</strong> {{ best[0] }} hours</p>
+				<p><strong>Execution Time:</strong> {{ best[1] }} hours</p>
+				<p><strong>Predicted Productivity:</strong> {{ best[2] }}%</p>
+			</section>
+			{% endif %}
+
+			<!-- Footer / Accessibility Info -->
+			<footer style="margin-top: 2rem; font-size: 0.85rem; text-align: center">
+				<p>&copy; 2026 Seseshe. All rights reserved.</p>
+				<p>Accessible & SEO-optimized for modern browsers.</p>
+			</footer>
+		</main>
+	</body>
+</html>
